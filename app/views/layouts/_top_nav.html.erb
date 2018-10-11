@@ -45,10 +45,19 @@
           <% end %>
         </li>
         <li>
-            <%= link_to 'Login', :login %>
-        </li>
-        <li>
-            <%= link_to 'Register', :signup %>
+          <% if current_user %>
+            <li><%= current_user.email %></li>
+            <li>
+              <%= link_to 'Logout', :logout %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to 'Login', :login %>
+            </li>
+            <li>
+              <%= link_to 'Register', :signup %>
+            </li>
+          <% end %>
         </li>
       </ul>
     </div>
