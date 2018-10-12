@@ -1,0 +1,9 @@
+Order Receipt:
+
+Your order is as follows:
+<% @order.line_items.each do |item| %>
+<%= item.product.name %> - <%= item.quantity %>
+<% end %>
+
+Total = $<%= @order.total_cents / 100.0 %>
+Thanks for shopping with us!
