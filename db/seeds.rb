@@ -6,6 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Returns the hash digest of the given string.
+def User.digest(string)
+  cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                BCrypt::Engine.cost
+  BCrypt::Password.create(string, cost: cost)
+end
+
 puts "Seeding Data ..."
 
 # Helper functions
@@ -132,5 +139,47 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+## Users
+
+u = User.new({
+  name: 'Kenz Bull',
+  email: 'kenziebullock13@gmail.com',
+  password_digest: BCrypt::Password.create('foobar')
+})
+u.save!(validate: false)
+
+## Reviews
+
+puts "Deleting and creating reviews.."
+
+Review.destroy_all
+
+Review.create!({
+  product_id: 1,
+  user_id: 1,
+  description: 'Test',
+  rating: 3
+})
+
+Review.create!({
+  product_id: 2,
+  user_id: 1,
+  description: 'Test',
+  rating: 4
+})
+
+Review.create!({
+  product_id: 1,
+  user_id: 1,
+  description: 'Test',
+  rating: 3
+})
+
+Review.create!({
+  product_id: 1,
+  user_id: 1,
+  description: 'Test',
+  rating: 5
+})
 
 puts "DONE!"

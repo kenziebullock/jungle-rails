@@ -46,7 +46,7 @@
         </li>
         <li>
           <% if current_user %>
-            <li><%= current_user.email %></li>
+            <li><a><%= current_user.email %></a></li>
             <li>
               <%= link_to 'Logout', :logout %>
             </li>
