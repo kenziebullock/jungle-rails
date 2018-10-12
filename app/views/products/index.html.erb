@@ -4,6 +4,10 @@
     <h1>Products</h1>
   </header>
 
+  <% if flash[:notice] %>
+    <div class="notice alert alert-danger"><%= flash[:notice] %></div>
+  <% end %>
+
   <div class="products">
     <%= render @products %>
   </div>
