@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :something
-    # write code here
+  
+  before_filter :check_user
   
   def create
     @review = Review.new(review_params)
@@ -28,5 +28,11 @@ class ReviewsController < ApplicationController
       :product_id,
       :user_id
     )
+  end
+
+  def check_user
+    if !current_user
+      redirect_to :products
+    end
   end
 end
