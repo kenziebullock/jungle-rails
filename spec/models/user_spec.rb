@@ -61,5 +61,11 @@ RSpec.describe User, type: :model do
       expect(user).to be_truthy
     end
 
+    it 'should authentice even if capitals are used in email' do
+      user1 = User.create!(name: 'test test', email: 'thing@thing.thing', password: 'something')
+      user = User.authenticate_with_credentials('thing@thing.THING', 'something')
+      expect(user).to be_truthy
+    end
+
   end
 end
